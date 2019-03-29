@@ -5,7 +5,7 @@ var con = mysql.createConnection({
   database:'reviewsdb'
 })
 
-con.connect(()=>{console.log('DATABASEHELPERS.JS LINE 8 connceted to db')})
+con.connect(()=>{console.log('DATABASEHELPERS LINE 8 connceted to db')})
 
 var getAllReviews = (callback) => {
 
