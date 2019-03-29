@@ -18,20 +18,20 @@ var getAllReviews = (productid, callback) => {
   })
 }
 
-var postReview = (productid, formBody, callback) => {
-  con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+var postReview = (productid, formbody, callback) => {
+  con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?)`,
   [
-    req.body.username,
-    req.body.rating,
-    req.body.size,
-    req.body.comfort,
-    req.body.prod_durability,
-    req.body.review_title,
-    req.body.review_text,
-    req.body.country,
-    req.body.city,
-    req.body.loc_state,
-    req.body.userfor,
+    formbody.username,
+    formbody.rating,
+    formbody.size,
+    formbody.comfort,
+    formbody.prod_durability,
+    formbody.review_title,
+    formbody.review_text,
+    formbody.country,
+    formbody.city,
+    formbody.loc_state,
+    formbody.usefor,
     productid
   ],(err,result) => {
     if (err) {
@@ -43,5 +43,6 @@ var postReview = (productid, formBody, callback) => {
 }
 
 module.exports = {
-  getAllReviews:getAllReviews
+  getAllReviews:getAllReviews,
+  postReview:postReview
 }
