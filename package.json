@@ -10,7 +10,7 @@
   "scripts": {
     "seed": "mysql -u root < schema.sql && node datainit.js",
     "start": "nodemon ./server",
-    "test":"jest"
+    "test":"jest --detectOpenHandles"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
