@@ -4,9 +4,10 @@ var express = require('express');
 var bodyParser = require ('body-parser')
 var app = express()
 
-app.get('/api/reviews',(req,res)=>{
+app.get('/api/reviews/:productid',(req,res)=>{
+var productid = req.params.productid
 
-  con.getAllReviews((err,result)=>{
+  con.getAllReviews(productid, (err,result)=>{
     if(err) {
       console.log('ERROR HERE',err)
     } else {
