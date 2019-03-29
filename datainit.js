@@ -8,6 +8,7 @@ var con = mysql.createConnection({
 })
 
 //SEEDING 20 RECORDS INTO DB
+var seedDb = () => {
 var i =20;
 while (i>0){
   con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?)`,[faker.internet.userName(),
@@ -48,7 +49,22 @@ while (i>0){
   })
   i--
 }
+}
 
+var deleteAllRecords = () => {
+  con.query(`TRUNCAT TABLE reviews`, (err, result) => {
+    if(!err){
+       console.log('all data cleared from reviews table')
+    }
+  })
+}
+
+seedDb()
+
+module.exports = {
+  seedDb: seedDb,
+  deleteAllRecords: deleteAllRecords
+}
 
 
 
