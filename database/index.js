@@ -5,11 +5,11 @@ var con = mysql.createConnection({
   database:'reviewsdb'
 })
 
-con.connect(()=>{console.log('DATABASEHELPERS LINE 8 connceted to db')})
 
-var getAllReviews = (callback) => {
 
-  con.query(`select * from reviews`,(err,result)=>{
+var getAllReviews = (productid, callback) => {
+
+  con.query(`select * from reviews where productid = ${productid}`,(err,result)=>{
     if (err) {
       callback(err,null)
     } else {
