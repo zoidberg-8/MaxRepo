@@ -24,8 +24,17 @@ var productid = req.params.productid
 
 //SUBMIT REVIEW
 app.post('/api/reviews/:productid',upload.none(),(req,res)=>{
-  res.status(200).json(req.body)
   console.log('POST RECEIVED', req.body)
+  var formbody = req.body
+  var productid = req.params.productid
+  con.postReview(productid,formbody,(err,result)=>{
+    if (err) {
+      console.log('DATA ADD ERROR', err)
+    } else {
+      console.log('RETURN FROM DATABASE', result)
+      res.status(200).json()
+    }
+  })
 })
 
 
