@@ -10,7 +10,7 @@ var con = mysql.createConnection({
 //SEEDING 20 RECORDS INTO DB
 var i =20;
 while (i>0){
-  con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text,date_submitted, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?,?)`,[faker.internet.userName(),
+  con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?)`,[faker.internet.userName(),
     faker.random.number({
       'min':1,
       'max':5
@@ -29,7 +29,6 @@ while (i>0){
     }),
     faker.lorem.words(),
     faker.lorem.sentences(),
-    faker.date.past(),
     faker.address.country(),
     faker.address.city(),
     faker.address.state(),
@@ -37,7 +36,7 @@ while (i>0){
       'min':1,
       'max':5
     }),
-    'AH8050-020'
+    '1'
   ],(err,result)=>{
     if(err){
       console.log(err)
