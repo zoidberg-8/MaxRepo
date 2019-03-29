@@ -7,9 +7,9 @@ var con = mysql.createConnection({
 
 
 
-var getAllReviews = (callback) => {
+var getAllReviews = (productid, callback) => {
 
-  con.query(`select * from reviews`,(err,result)=>{
+  con.query(`select * from reviews where productid = ${productid}`,(err,result)=>{
     if (err) {
       callback(err,null)
     } else {
