@@ -42,7 +42,22 @@ var postReview = (productid, formbody, callback) => {
   })
 }
 
+//USED FOR TESTING IN JEST
+var deleteAllRecords = (callback) => {
+  con.query(`TRUNCATE TABLE reviews`, (err, result) => {
+    if(!err){
+      callback(null,result)
+    }
+  })
+}
+
+var end = () => {
+  con.end()
+}
+
 module.exports = {
   getAllReviews:getAllReviews,
-  postReview:postReview
+  postReview:postReview,
+  deleteAllRecords: deleteAllRecords,
+  end:end
 }
