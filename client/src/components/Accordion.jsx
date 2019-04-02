@@ -1,5 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Modal from 'react-modal';
+Modal.setAppElement('#app')
+
+// var Todal = styled.Modal`
+// border: 1px solid black;
+// `;
 
 var Button = styled.button`
   background-color: #eee;
@@ -28,14 +34,24 @@ class Accordion extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      open:false
+      open:false,
+      modal:false,
+      reviews:[1,2,3,4,5,6,7]
     }
     this.toggleOpen = this.toggleOpen.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   toggleOpen(){
+    console.log('DROP DOWN TOGGLE')
     this.setState({
       open: !this.state.open
+    })
+  }
+  toggleModal(){
+    console.log('toggle modal')
+    this.setState({
+      modal: !this.state.modal
     })
   }
 
@@ -43,9 +59,23 @@ class Accordion extends React.Component{
     return(
       <div>
       <Button onClick = {this.toggleOpen}>reviews</Button>
-      <ReviewContent open = {this.state.open}>
-      LOAD 3 REVIEWS HERE
-      LINK TO READ MORE
+      <ReviewContent open = {this.state.open} >
+      load 3 reviews
+
+      <button onClick = {this.toggleModal}>
+        SHOW Modal
+      </button>
+
+      <Modal isOpen = {this.state.modal} contentLabel='test'>
+
+        <button onClick = {this.toggleModal}>
+          close
+        </button>
+
+      </Modal>
+
+
+
 
       </ReviewContent>
       </div>
