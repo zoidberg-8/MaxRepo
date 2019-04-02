@@ -3,7 +3,15 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import $ from 'jquery';
 
+var customStyles ={
+  content:{
 
+    width:'55%',
+    margin:'auto'
+
+  }
+
+};
 
 class InputForm extends React.Component{
   constructor(props){
@@ -14,7 +22,6 @@ class InputForm extends React.Component{
     }
     this.toggleInputModal = this.toggleInputModal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
   }
 
   toggleInputModal(){
@@ -26,25 +33,22 @@ class InputForm extends React.Component{
 
   handleSubmit(e){
     console.log('form submitted')
+    var form = e.target
+    var data = new FormData(form)
 
-   var form = e.target
-   var data = new FormData(form)
-
-   fetch('/api/reviews/1',{
-     method:'POST',
-     body:data
-   })
+    fetch('/api/reviews/1',{
+      method:'POST',
+      body:data
+    })
 
   }
-
-
 
   render(){
     return(
 
 <div>
   <button onClick={this.toggleInputModal}>Write Review</button>
-    <Modal isOpen = {this.state.inputModal}>
+    <Modal isOpen = {this.state.inputModal} style={customStyles}>
       <button onClick = {this.toggleInputModal}>close</button>
 
       <div>WRITE A REVIEW</div>
@@ -100,6 +104,35 @@ class InputForm extends React.Component{
             <Divtext>
               <textarea rows='4' cols='50' name ='review_text' form='reviewform'></textarea>
             </Divtext>
+
+            <Divcol>
+              <div>Country/Region:</div>
+            </Divcol>
+            <Divtext>
+              <select name ='country'>
+                <option value='CHINA'>china</option>
+                <option value='CHINA'>china</option>
+              </select>
+            </Divtext>
+            <Divcol>
+              <div>City:</div>
+            </Divcol>
+            <Divtext>
+            <input type='text' name='city'></input>
+            </Divtext>
+            <Divcol>
+              Use for:
+            </Divcol>
+            <Divtext>
+            <select name ='country'>
+                <option value='0'></option>
+                <option value='1'>School</option>
+                <option value='2'>Hanging out</option>
+                <option value='3'>Working out</option>
+                <option value='4'>Playing my sport</option>
+              </select>
+            </Divtext>
+
             <Divcross>
               <input type='submit'></input>
             </Divcross>
@@ -131,6 +164,7 @@ var Divtext = styled.div`
 grid-column-start:2;
 grid-column-end:4;;
 `
+
 
 
 export default InputForm;
