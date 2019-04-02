@@ -22,12 +22,12 @@ class ModalAllReviews extends React.Component{
       <div>
         <button onClick = {this.toggleModal}>More Reviews</button>
          <Modal isOpen = {this.state.modalstate} contentLabel='test'>
-    <button onClick = {this.toggleModal}>
-      close
-    </button>
+          <button onClick = {this.toggleModal}>
+            close
+          </button>
      {/* LOAD ALL REVIEWS IN MODAL */}
-    <Reviews allreviews = {this.props.allreviews}/>
-  </Modal>
+            <Reviews allreviews = {this.props.allreviews}/>
+          </Modal>
 
       </div>
     )
