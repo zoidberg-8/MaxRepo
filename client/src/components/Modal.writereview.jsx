@@ -5,13 +5,11 @@ import $ from 'jquery';
 
 var customStyles ={
   content:{
-
     width:'55%',
     margin:'auto'
-
   }
-
 };
+
 
 class InputForm extends React.Component{
   constructor(props){
@@ -49,22 +47,30 @@ class InputForm extends React.Component{
 <div>
   <button onClick={this.toggleInputModal}>Write Review</button>
     <Modal isOpen = {this.state.inputModal} style={customStyles}>
-      <button onClick = {this.toggleInputModal}>close</button>
+      <Closebtn onClick = {this.toggleInputModal}>x</Closebtn>
 
-      <div>WRITE A REVIEW</div>
-      <div>Please share your experience.</div>
+      <Header>WRITE A REVIEW</Header>
+      <Subtext>Please share your experience.</Subtext>
       <Gridform id='reviewform' onSubmit = {this.handleSubmit} >
 
-        <Divcross>
+        <Divcol>
+          <div>Overall Rating</div>
+        </Divcol>
+
+        <Divtext>
             <input type = 'radio' name ='rating' value = '1'></input>
             <input type = 'radio' name ='rating' value = '2'></input>
             <input type = 'radio' name ='rating' value = '3'></input>
             <input type = 'radio' name ='rating' value = '4'></input>
             <input type = 'radio' name ='rating' value = '5'></input>
 
-            </Divcross>
+            </Divtext>
 
-            <Divcol>
+
+           <Line></Line>
+
+
+            <TopSelectors>
               Size:
               <br></br>
               <input type = 'radio' name='size' value='1'></input><span>Runs Small</span>
@@ -72,8 +78,8 @@ class InputForm extends React.Component{
               <input type = 'radio' name='size' value='2'></input><span>Just Right</span>
               <br></br>
               <input type = 'radio' name='size' value='3'></input><span>Runs Big</span>
-            </Divcol>
-            <Divcol>
+            </TopSelectors>
+            <TopSelectors>
               Comfort:
               <br></br>
               <input type = 'radio' name='comfort' value='4'></input><span>Uncomfortable</span>
@@ -81,8 +87,8 @@ class InputForm extends React.Component{
               <input type = 'radio' name='comfort' value='5'></input><span>Average</span>
               <br></br>
               <input type = 'radio' name='comfort' value='6'></input><span>Very Comfortable</span>
-            </Divcol>
-            <Divcol>
+            </TopSelectors>
+            <TopSelectors>
               Durability:
               <br></br>
               <input type = 'radio' name='prod_durability' value='7'></input><span>Not Durable</span>
@@ -90,52 +96,60 @@ class InputForm extends React.Component{
                <input type = 'radio' name='prod_durability' value='8'></input><span>Average</span>
                <br></br>
               <input type = 'radio' name='prod_durability' value='9'></input><span>Very Durable</span>
-            </Divcol>
+            </TopSelectors>
+
+
+              <Line></Line>
+
+
             <Divcol>
-              <div>Review Title:</div>
+            Review Title:
             </Divcol>
-            <Divtext>
-            <textarea rows='1' cols='50' name ='review_title' form='reviewform'></textarea>
-            </Divtext>
+
+            <FormTextArea rows='1' cols='50' name ='review_title' form='reviewform'></FormTextArea>
+
 
             <Divcol>
               <div> Review</div>
             </Divcol>
-            <Divtext>
-              <textarea rows='4' cols='50' name ='review_text' form='reviewform'></textarea>
-            </Divtext>
+
+            <FormTextArea rows='4' cols='50' name ='review_text' form='reviewform'>
+            </FormTextArea>
+
+
+              <Line></Line>
+
 
             <Divcol>
               <div>Country/Region:</div>
             </Divcol>
-            <Divtext>
-              <select name ='country'>
-                <option value='CHINA'>china</option>
-                <option value='CHINA'>china</option>
-              </select>
-            </Divtext>
+
+              <FormSelect name ='country'>
+                <option value='China'>china</option>
+                <option value='UnitedStates'>US</option>
+              </FormSelect>
+
             <Divcol>
               <div>City:</div>
             </Divcol>
-            <Divtext>
-            <input type='text' name='city'></input>
-            </Divtext>
+
+            <FormTextArea type='text' name='city'></FormTextArea>
+
             <Divcol>
               Use for:
             </Divcol>
-            <Divtext>
-            <select name ='country'>
+
+            <FormSelect name ='usefor'>
                 <option value='0'></option>
                 <option value='1'>School</option>
                 <option value='2'>Hanging out</option>
                 <option value='3'>Working out</option>
                 <option value='4'>Playing my sport</option>
-              </select>
-            </Divtext>
+            </FormSelect>
 
-            <Divcross>
-              <input type='submit'></input>
-            </Divcross>
+
+              <SubmitButton type='submit' value='SUBMIT'></SubmitButton>
+
 
       </Gridform>
 
@@ -151,18 +165,71 @@ class InputForm extends React.Component{
 var Gridform = styled.form`
  display:grid;
  grid-template-columns: auto auto auto;
-
+ grid-row-gap:30px;
 `
-var Divcross = styled.div`
-grid-column-start:1;
-grid-column-end:4;
+var Closebtn = styled.button`
+float:right;
+border:1px solid #E5E5E5;
+margin:auto;
 `
 var Divcol = styled.div`
-grid-columm:1/3;
+color:#111;
+font-size:12px;
+font-family:'Helvetica Neue'
 `
 var Divtext = styled.div`
 grid-column-start:2;
-grid-column-end:4;;
+grid-column-end:4;
+`
+var FormSelect = styled.select`
+grid-column-start:2;
+grid-column-end:4;
+border:1px solid #E5E5E5;
+height:56px;
+`
+var FormTextArea = styled.textarea`
+grid-column-start:2;
+grid-column-end:4;
+border:1px solid #E5E5E5;
+height:56px;
+`
+var Header = styled.div`
+text-align:center;
+font-size:14px;
+font-family:'Helvetica Neue';
+margin-top:20px;
+font-weight:bold;
+`
+var Subtext = styled.div`
+text-align:center;
+font-size:12px;
+padding-bottom:30px;
+color: #8D8D8D;
+font-family:'Helvetica Neue';
+`
+var Line = styled.hr`
+grid-column-start:1;
+grid-column-end:4;
+border:0.5px solid #d6d5d5;
+width:100%
+`
+var TopSelectors = styled.div`
+align-items:right;
+color:#111;
+font-family: 'Helvetica Neue';
+font-size:12px;
+padding:5px;
+`
+var SubmitButton = styled.input`
+grid-column-start:1;
+grid-column-end:4;
+height:50px;
+background:black;
+color:white;
+border-radius:2px;
+font-size:14px;
+font-family:'Helvetica Neue';
+
 `
 
 
