@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var faker = require('faker')
 var con = mysql.createConnection({
   host:'localhost',
   user:'root',
@@ -21,7 +22,7 @@ var getAllReviews = (productid, callback) => {
 var postReview = (productid, formbody, callback) => {
   con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?)`,
   [
-    formbody.username,
+    faker.internet.userName(),
     formbody.rating,
     formbody.size,
     formbody.comfort,
