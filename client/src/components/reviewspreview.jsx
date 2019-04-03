@@ -7,8 +7,8 @@ var ReviewsPreview = (props) =>(
     <Eachreviewdiv>
       <Titlediv>{i.review_title}</Titlediv>
       <Starspan>{i.rating}</Starspan>
-      <Userspan>{i.username}</Userspan>
-      <Textbodydiv>{i.current_timestamp}</Textbodydiv>
+      <Span>{i.username}</Span>
+      <Span>{i.date_submitted.substring(0,10)}</Span>
       <Textbodydiv>{i.review_text}</Textbodydiv>
     </Eachreviewdiv>)}
   </div>
@@ -19,8 +19,9 @@ var Starspan = styled.span`
 font-size:12px;
 padding-right:5px;
 `
-var Userspan = styled.span`
-font-size:12px
+var Span = styled.span`
+font-size:12px;
+padding-left:5px;
 `
 var Textbodydiv = styled.div`
 font-size:12px;
