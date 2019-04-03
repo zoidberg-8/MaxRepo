@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   country varchar(50),
   city varchar(50),
   loc_state varchar(50),
-  usefor varchar(50),
+  usefor int,
   productid varchar(20) not null,
   PRIMARY KEY(review_id)
 );
