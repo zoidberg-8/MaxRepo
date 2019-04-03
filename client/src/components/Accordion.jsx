@@ -1,12 +1,75 @@
 import React from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
+import Reviews from './reviews.jsx';
+import ReviewsPreview from './reviewspreview.jsx'
+import ModalAllReviews from './Modal.allreviews.jsx'
+import InputForm from './Modal.writereview.jsx'
 Modal.setAppElement('#app')
+import $ from 'jquery';
 
-// var Todal = styled.Modal`
-// border: 1px solid black;
-// `;
 
+class Accordion extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      open:false,
+      modal:false,
+      reviewsfromdb:[]
+    }
+    this.toggleOpen = this.toggleOpen.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
+  }
+
+  componentDidMount(){
+    console.log('componenet mount')
+    $.ajax({
+      url:'/api/reviews/1',
+      method:'GET',
+      success:(data)=>{this.setState({
+        reviewsfromdb:data
+      })}
+    })
+  }
+
+  toggleOpen(){
+    console.log(this.state.reviewsfromdb)
+    this.setState({
+      open: !this.state.open
+    })
+  }
+  toggleModal(){
+    console.log('toggle modal')
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+
+  render(){
+    return(
+      <div>
+        <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
+
+          <ReviewContent open = {this.state.open} >
+
+          <InputForm/>
+
+          <ReviewsPreview allreviews = {this.state.reviewsfromdb}/>
+
+
+          <ModalAllReviews
+            allreviews = {this.state.reviewsfromdb}
+          />
+
+
+        </ReviewContent>
+      </div>
+    )
+
+  }
+}
+
+//COMPONENT STYLE
 var Button = styled.button`
   background-color: #eee;
   color: #444;
@@ -29,59 +92,5 @@ var ReviewContent = styled.div`
   padding: ${props => (props.open ? "15px" : "0 15px")};
   transition: all 0.3s;
 `
-
-class Accordion extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      open:false,
-      modal:false,
-      reviews:[1,2,3,4,5,6,7]
-    }
-    this.toggleOpen = this.toggleOpen.bind(this)
-    this.toggleModal = this.toggleModal.bind(this)
-  }
-
-  toggleOpen(){
-    console.log('DROP DOWN TOGGLE')
-    this.setState({
-      open: !this.state.open
-    })
-  }
-  toggleModal(){
-    console.log('toggle modal')
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
-
-  render(){
-    return(
-      <div>
-      <Button onClick = {this.toggleOpen}>reviews</Button>
-      <ReviewContent open = {this.state.open} >
-      load 3 reviews
-
-      <button onClick = {this.toggleModal}>
-        SHOW Modal
-      </button>
-
-      <Modal isOpen = {this.state.modal} contentLabel='test'>
-
-        <button onClick = {this.toggleModal}>
-          close
-        </button>
-
-      </Modal>
-
-
-
-
-      </ReviewContent>
-      </div>
-    )
-
-  }
-}
 
 export default Accordion
