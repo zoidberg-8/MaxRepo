@@ -30,6 +30,7 @@ class InputForm extends React.Component{
   }
 
   handleSubmit(e){
+//prevent default?
     console.log('form submitted')
     var form = e.target
     var data = new FormData(form)
@@ -37,6 +38,7 @@ class InputForm extends React.Component{
     fetch('/api/reviews/1',{
       method:'POST',
       body:data
+
     })
 
   }
@@ -45,7 +47,10 @@ class InputForm extends React.Component{
     return(
 
 <div>
-  <button onClick={this.toggleInputModal}>Write Review</button>
+  <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+  <br></br>
+  <br></br>
+  <WriteReview onClick={this.toggleInputModal}>Write Review</WriteReview>
     <Modal isOpen = {this.state.inputModal} style={customStyles}>
       <Closebtn onClick = {this.toggleInputModal}>x</Closebtn>
 
@@ -162,6 +167,15 @@ class InputForm extends React.Component{
 }
 
 //COMPONENET STYLING
+
+var WriteReview = styled.button`
+font-family:'Helvetica Neue';
+border:0px;
+border-bottom:solid 0.5px black;
+padding-left:0px;
+padding-right:0px;
+`
+
 var Gridform = styled.form`
  display:grid;
  grid-template-columns: auto auto auto;
