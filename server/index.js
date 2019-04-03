@@ -5,12 +5,14 @@ var bodyParser = require ('body-parser')
 var multer = require('multer')
 var app = express()
 var upload = multer()
+var path = require('path')
 
-
+app.use(express.static(path.join(__dirname,'../public/dist')))
 
 
 //GET ALL REVIEWS FROM DB BASED ON PROD ID
 app.get('/api/reviews/:productid',(req,res)=>{
+  console.log('GET RECEIVED')
 var productid = req.params.productid
 
   con.getAllReviews(productid, (err,result)=>{
