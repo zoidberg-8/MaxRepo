@@ -10,7 +10,7 @@
   "scripts": {
     "seed": "mysql -u root < schema.sql && node datainit.js",
     "start": "nodemon ./server",
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "react-dev": "webpack -d --watch"
   },
   "dependencies": {
@@ -30,6 +30,8 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jest": "^24.5.0",
     "webpack": "^4.29.6",
