@@ -1,14 +1,16 @@
 var con = require('../database/index')
 // var seed = require('../datainit.js')
+// import Adapter from 'enzyme-adapter-react-16';
+// import Enzyme, { shallow, mount, render } from 'enzyme';
+
+
 
 
 describe('Get all intitial data from reviews',()=>{
 
-
-
   test('Get all data',done=>{
     function callback(data){
-      expect(data.length).toBe(20)
+      expect(data.length).not.toBeLessThan(0)
       done()
     }
     con.getAllReviews(1,(err,result)=>{
@@ -38,6 +40,12 @@ describe('Get all intitial data from reviews',()=>{
 
 
 })
+
+// test('if there is a div element', () => {
+//   const wrapper = mount(<Desc />);
+//   expect(wrapper.find('h3')).toHaveLength(1);
+// })
+
 
 
 
