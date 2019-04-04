@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS reviews (
   size int,
   comfort int,
   prod_durability int,
-  review_title varchar(50) not null,
-  review_text varchar(500) not null,
-  date_submitted date,
+  review_title varchar(100) not null,
+  review_text varchar(800) not null,
+  date_submitted datetime default current_timestamp on update current_timestamp,
   country varchar(50),
   city varchar(50),
   loc_state varchar(50),
-  usefor varchar(50),
+  usefor int,
   productid varchar(20) not null,
   PRIMARY KEY(review_id)
 );
