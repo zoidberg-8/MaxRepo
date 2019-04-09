@@ -162,7 +162,7 @@ display:grid
 grid-template-columns: auto auto auto
 padding-bottom:30px;
 padding-top:30px;
-grid-column-gap:5%;
+grid-column-gap:10%;
 `
 var Oneframe = styled.span`
 font-size:14px;
