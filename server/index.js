@@ -7,13 +7,14 @@ var app = express()
 var upload = multer()
 var path = require('path')
 
-app.use(express.static(path.join(__dirname,'../public/dist')))
+app.use('/shoes/:id/reviews', express.static(path.join(__dirname,'../public/dist')))
 
 
 //GET ALL REVIEWS FROM DB BASED ON PROD ID
-app.get('/api/reviews/:productid',(req,res)=>{
+app.get('/api/:productid/reviews',(req,res)=>{
   console.log('GET RECEIVED')
 var productid = req.params.productid
+console.log(productid)
 
   con.getAllReviews(productid, (err,result)=>{
     if(err) {
@@ -25,7 +26,7 @@ var productid = req.params.productid
 })
 
 //SUBMIT REVIEW
-app.post('/api/reviews/:productid',upload.none(),(req,res)=>{
+app.post('/api/:productid/reviews',upload.none(),(req,res)=>{
   console.log('POST RECEIVED', req.body)
   var formbody = req.body
   var productid = req.params.productid

@@ -23,8 +23,12 @@ class Accordion extends React.Component{
 
   componentDidMount(){
     console.log('componenet mount')
+    var path = window.location.pathname
+    console.log(path.slice(7))
+    var prodid = path.slice(7)
+
     $.ajax({
-      url:'/api/reviews/1',
+      url:`/api/${prodid}`,
       method:'GET',
       success:(data)=>{this.setState({
         reviewsfromdb:data
