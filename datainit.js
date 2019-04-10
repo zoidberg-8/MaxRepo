@@ -10,8 +10,10 @@ var con = mysql.createConnection({
 
 //SEEDING 20 RECORDS INTO DB
 
-var i =20;
-while (i>0){
+
+
+for (var numOfProducts = 1; numOfProducts<=10; numOfProducts++){
+  for (var id = 1; id<=10;id++){
   con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?)`,[faker.internet.userName(),
     faker.random.number({
       'min':1,
@@ -38,7 +40,7 @@ while (i>0){
       'min':1,
       'max':5
     }),
-    '1'
+    id
   ],(err,result)=>{
     if(err){
       console.log(err)
@@ -48,7 +50,8 @@ while (i>0){
     }
 
   })
-  i--
+
+  }
 }
 }
 
