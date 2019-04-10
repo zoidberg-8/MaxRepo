@@ -32,10 +32,14 @@ class InputForm extends React.Component{
   handleSubmit(e){
 //prevent default?
     console.log('form submitted')
+
+    var path = window.location.pathname
+
+    var prodid = path.slice(7)
     var form = e.target
     var data = new FormData(form)
 
-    fetch('/api/reviews/1',{
+    fetch(`/api/${prodid}`,{
       method:'POST',
       body:data
 
