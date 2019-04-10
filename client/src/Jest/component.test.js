@@ -1,10 +1,7 @@
 import React from 'react'
 
-
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
-
-
 
 import { configure, mount, shallow, render } from 'enzyme';
 
@@ -16,11 +13,12 @@ import { configure, mount, shallow, render } from 'enzyme';
 import ModalAllReviews from '../components/Modal.allreviews.jsx'
 
 
-describe ('Quantity', () => {
-  it('renders three <Foo /> components', () => {
+describe ('Component Rendering', () => {
+  it('It renders ModalAllReviews Component', () => {
     const Wrapper = shallow(<ModalAllReviews />);
     expect((Wrapper).exists()).toBe(true)
   });
+
 
 
 
