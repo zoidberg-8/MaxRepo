@@ -28,7 +28,7 @@ class Accordion extends React.Component{
     var prodid = path.slice(7)
 
     $.ajax({
-      url:`/api/${prodid}`,
+      url:`/shoes/${prodid}reviews`,
       method:'GET',
       success:(data)=>{this.setState({
         reviewsfromdb:data

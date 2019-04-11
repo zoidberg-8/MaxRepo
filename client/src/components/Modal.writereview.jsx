@@ -39,7 +39,7 @@ class InputForm extends React.Component{
     var form = e.target
     var data = new FormData(form)
 
-    fetch(`/api/${prodid}`,{
+    fetch(`/shoes/${prodid}reviews`,{
       method:'POST',
       body:data
 
