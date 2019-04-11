@@ -30,7 +30,7 @@ class InputForm extends React.Component{
   }
 
   handleSubmit(e){
-//prevent default?
+    e.preventDefault()
     console.log('form submitted')
 
     var path = window.location.pathname
@@ -43,7 +43,7 @@ class InputForm extends React.Component{
       method:'POST',
       body:data
 
-    })
+    }).then(()=>this.toggleInputModal())
 
   }
 
