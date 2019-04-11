@@ -43,7 +43,7 @@ class InputForm extends React.Component{
       method:'POST',
       body:data
 
-    }).then(()=>this.toggleInputModal())
+    }).then(()=>this.toggleInputModal()).then(()=>this.props.updatefunction())
   }
 
   render(){
