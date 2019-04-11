@@ -38,13 +38,12 @@ class InputForm extends React.Component{
     var prodid = path.slice(7)
     var form = e.target
     var data = new FormData(form)
-
+    console.log(prodid)
     fetch(`/shoes/${prodid}reviews`,{
       method:'POST',
       body:data
 
     }).then(()=>this.toggleInputModal())
-
   }
 
   render(){
