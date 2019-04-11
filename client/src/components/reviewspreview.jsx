@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 var ReviewsPreview = (props) =>(
-  <div>
+  <div style={{"width":"500px"}}>
    {props.allreviews.slice(0,3).map((i)=>
     <Eachreviewdiv>
       <Titlediv>{i.review_title}</Titlediv>
