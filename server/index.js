@@ -6,6 +6,7 @@ var multer = require('multer')
 var app = express()
 var upload = multer()
 var path = require('path')
+app.use(bodyParser.json());
 
 app.use('/shoes/:id', express.static(path.join(__dirname,'../public/dist')))
 
@@ -30,12 +31,13 @@ app.post('/shoes/:id/reviews',upload.none(),(req,res)=>{
   console.log('POST RECEIVED', req.body)
   var formbody = req.body
   var productid = req.params.id
-  con.postReview(productid,formbody,(err,result)=>{
+  con.postReview(productid,formbody,(err,formbody)=>{
     if (err) {
       console.log('DATA ADD ERROR', err)
     } else {
-      console.log('RETURN FROM DATABASE', result)
-      res.status(200).json()
+      console.log('RETURN FROM DATABASE', formbody)
+
+      res.status(200).json(formbody)
     }
   })
 })
