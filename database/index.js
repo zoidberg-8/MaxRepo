@@ -14,6 +14,8 @@ var getAllReviews = (productid, callback) => {
     if (err) {
       callback(err,null)
     } else {
+      console.log(
+        'FROM GET ALL REVIEWS', result)
       callback(null,result)
     }
   })
@@ -38,6 +40,7 @@ var postReview = (productid, formbody, callback) => {
     if (err) {
       callback(err, null)
     } else {
+      console.log('from app server',result)
       callback(null,result)
     }
   })
