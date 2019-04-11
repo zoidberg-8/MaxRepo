@@ -14,8 +14,6 @@ var getAllReviews = (productid, callback) => {
     if (err) {
       callback(err,null)
     } else {
-      console.log(
-        'FROM GET ALL REVIEWS', result)
       callback(null,result)
     }
   })
