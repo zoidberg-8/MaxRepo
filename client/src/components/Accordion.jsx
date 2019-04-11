@@ -51,12 +51,26 @@ class Accordion extends React.Component{
     })
   }
 
-  updatefunction(input){
-    console.log('from input',input)
-   var updated =  this.state.reviewsfromdb.push(input)
-   this.setState({
-     reviewsfromdb:updated
-   })
+  //this function passed into inputform as callback to update reviewsfrom db state after form submission
+  updatefunction(){
+    var path = window.location.pathname
+    console.log(path.slice(7))
+    var prodid = path.slice(7)
+
+    $.ajax({
+      url:`/shoes/${prodid}reviews`,
+      method:'GET',
+      success:(data)=>{this.setState({
+        reviewsfromdb:data
+      })}
+    })
+
+
+  //   console.log('SEVER/INDEX',input)
+  //  var updated =  this.state.reviewsfromdb.push(input)
+  //  this.setState({
+  //    reviewsfromdb:updated
+  //  })
   }
 
 
