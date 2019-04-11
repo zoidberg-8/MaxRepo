@@ -9,6 +9,7 @@ Modal.setAppElement('#app')
 import $ from 'jquery';
 
 
+
 class Accordion extends React.Component{
   constructor(props){
     super(props);
@@ -19,6 +20,7 @@ class Accordion extends React.Component{
     }
     this.toggleOpen = this.toggleOpen.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
+    this.updatefunction = this.updatefunction.bind(this)
   }
 
   componentDidMount(){
@@ -49,6 +51,15 @@ class Accordion extends React.Component{
     })
   }
 
+  updatefunction(input){
+    console.log('from input',input)
+   var updated =  this.state.reviewsfromdb.push(input)
+   this.setState({
+     reviewsfromdb:updated
+   })
+  }
+
+
   render(){
     return(
       <div>
@@ -56,7 +67,7 @@ class Accordion extends React.Component{
 
           <ReviewContent open = {this.state.open} >
 
-          <InputForm/>
+          <InputForm updatefunction = {this.updatefunction}/>
 
           <ReviewsPreview allreviews = {this.state.reviewsfromdb}/>
 
