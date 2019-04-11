@@ -65,12 +65,6 @@ class Accordion extends React.Component{
       })}
     })
 
-
-  //   console.log('SEVER/INDEX',input)
-  //  var updated =  this.state.reviewsfromdb.push(input)
-  //  this.setState({
-  //    reviewsfromdb:updated
-  //  })
   }
 
 
