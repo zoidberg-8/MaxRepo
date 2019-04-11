@@ -79,7 +79,7 @@ var Button = styled.button`
   color: #444;
   cursor: pointer;
   padding: 18px;
-  width: 100%;
+  width: 500px;
   border: none;
   text-align: left;
   outline: none;
