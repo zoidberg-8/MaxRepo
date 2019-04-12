@@ -8,6 +8,9 @@ var upload = multer()
 var path = require('path')
 app.use(bodyParser.json());
 
+//if theres no path given
+app.use(express.static(path.join(__dirname,'../public/dist')))
+
 app.use('/shoes/:id', express.static(path.join(__dirname,'../public/dist')))
 
 
@@ -41,7 +44,6 @@ app.post('/shoes/:id/reviews',upload.none(),(req,res)=>{
     }
   })
 })
-
 
 
 var port = 7000
