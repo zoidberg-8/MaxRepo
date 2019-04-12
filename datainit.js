@@ -12,8 +12,8 @@ var con = mysql.createConnection({
 
 
 
-for (var numOfProducts = 1; numOfProducts<=10; numOfProducts++){
-  for (var id = 1; id<=10;id++){
+for (var numOfReviews = 1; numOfReviews<=20; numOfReviews++){
+  for (var id = 1; id<=100;id++){
   con.query(`insert into reviews (username, rating, size, comfort, prod_durability, review_title, review_text, country, city,loc_state, usefor,productid ) values (?,?,?,?,?,?,?,?,?,?,?,?)`,[faker.internet.userName(),
     faker.random.number({
       'min':1,
