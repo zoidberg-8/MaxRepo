@@ -4,4 +4,4 @@ import App from './components/app.jsx'
 import Modal from 'react-modal';
 
 
-ReactDOM.render(<App/>, document.getElementById('app'))
+ReactDOM.render(<App/>, document.getElementById('reviews'))
