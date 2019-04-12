@@ -5,7 +5,7 @@ import Reviews from './reviews.jsx';
 import ReviewsPreview from './reviewspreview.jsx'
 import ModalAllReviews from './Modal.allreviews.jsx'
 import InputForm from './Modal.writereview.jsx'
-Modal.setAppElement('#app')
+Modal.setAppElement('#reviews')
 import $ from 'jquery';
 
 
@@ -28,6 +28,10 @@ class Accordion extends React.Component{
     var path = window.location.pathname
     console.log(path.slice(7))
     var prodid = path.slice(7)
+
+    if (prodid===''){
+      prodid='1/'
+    }
 
     $.ajax({
       url:`/shoes/${prodid}reviews`,
