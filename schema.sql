@@ -6,7 +6,7 @@ USE reviewsdb;
 
 CREATE TABLE IF NOT EXISTS reviews (
   review_id int not null auto_increment,
-  username varchar(50) not null,
+  username varchar(100) not null,
   rating int,
   size int,
   comfort int,
@@ -14,11 +14,11 @@ CREATE TABLE IF NOT EXISTS reviews (
   review_title varchar(100) not null,
   review_text varchar(800) not null,
   date_submitted datetime default current_timestamp on update current_timestamp,
-  country varchar(50),
-  city varchar(50),
-  loc_state varchar(50),
+  country varchar(100),
+  city varchar(100),
+  loc_state varchar(100),
   usefor int,
-  productid varchar(20) not null,
+  productid varchar(100) not null,
   PRIMARY KEY(review_id)
 );
 

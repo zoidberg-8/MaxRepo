@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 //if theres no path given
 app.use(express.static(path.join(__dirname,'../public/dist')))
 
+//if product id given in path
 app.use('/shoes/:id', express.static(path.join(__dirname,'../public/dist')))
 
 
@@ -46,7 +47,7 @@ app.post('/shoes/:id/reviews',upload.none(),(req,res)=>{
 })
 
 
-var port = 7000
+var port = process.env.PORT ||7000
 app.listen(port,(err,result)=>{
   if(err){
     console.log('SERVER.JS LINE 10 ERROR')
