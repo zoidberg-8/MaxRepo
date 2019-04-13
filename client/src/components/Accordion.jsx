@@ -16,12 +16,19 @@ class Accordion extends React.Component{
     this.state = {
       open:false,
       modal:false,
-      reviewsfromdb:[]
+      reviewsfromdb:[],
+      reviewsSet:[],
+      start:0,
+      reviewstoshow:10
     }
     this.toggleOpen = this.toggleOpen.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
     this.updatefunction = this.updatefunction.bind(this)
+    this.createSet = this.createSet.bind(this)
+    this.increaseLimit = this.increaseLimit.bind(this)
   }
+
+
 
   componentDidMount(){
     console.log('componenet mount')
@@ -36,23 +43,63 @@ class Accordion extends React.Component{
     $.ajax({
       url:`/shoes/${prodid}reviews`,
       method:'GET',
-      success:(data)=>{this.setState({
-        reviewsfromdb:data
-      })}
+      success:(data)=>{
+        this.setState({
+        reviewsfromdb:data})
+
+      this.createSet()
+
+    }
     })
   }
 
   toggleOpen(){
-    console.log(this.state.reviewsfromdb)
+    //console.log(this.state.reviewsfromdb)
     this.setState({
       open: !this.state.open
     })
   }
   toggleModal(){
-    console.log('toggle modal')
+    //console.log('toggle modal')
     this.setState({
       modal: !this.state.modal
     })
+  }
+
+  createSet(){
+      var newSet = this.state.reviewsSet
+      var start = this.state.start
+      console.log(this.state.reviewsSet)
+      console.log('start',start)
+      console.log('value from db', this.state.reviewsfromdb[start],'index',start)
+      for (var start; start<this.state.reviewstoshow;start++){
+
+       if(this.state.reviewsfromdb[start]){
+
+        newSet.push(this.state.reviewsfromdb[start])
+       }
+      }
+
+      this.setState({
+        reviewsSet:newSet
+      })
+
+      console.log('from create set',this.state.reviewsSet)
+
+  }
+
+  increaseLimit(){
+    console.log('start of increaselimit func', this.state.reviewsSet)
+    var newLimit = this.state.reviewstoshow + 10
+    var newStart = this.state.start +10
+    console.log('new limit after increase', newLimit)
+    this.setState({
+      reviewstoshow: newLimit,
+      start: newStart
+    }, ()=>this.createSet())
+
+    console.log('new limit', this.state.reviewstoshow)
+    console.log('new set from increase limit function',this.state.newSet)
   }
 
   //this function passed into inputform as callback to update reviewsfrom db state after form submission
@@ -66,14 +113,19 @@ class Accordion extends React.Component{
       method:'GET',
       success:(data)=>{this.setState({
         reviewsfromdb:data
-      })}
+      })
+
+
+    }
     })
 
   }
 
 
   render(){
+
     return(
+
       <div>
         <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
 
@@ -86,6 +138,9 @@ class Accordion extends React.Component{
 
           <ModalAllReviews
             allreviews = {this.state.reviewsfromdb}
+            reviewsSet = {this.state.reviewsSet}
+            increaselimit = {this.increaseLimit}
+            createSet = {this.createSet}
           />
 
 
