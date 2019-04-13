@@ -26,7 +26,7 @@ class Accordion extends React.Component{
     this.updatefunction = this.updatefunction.bind(this)
     this.createSet = this.createSet.bind(this)
     this.increaseLimit = this.increaseLimit.bind(this)
-    this.resetStartEnd = this.resetStartEnd.bind(this)
+
   }
 
   componentDidMount(){
@@ -44,7 +44,7 @@ class Accordion extends React.Component{
       method:'GET',
       success:(data)=>{
         this.setState({
-        reviewsfromdb:data},()=>this.createSet())
+        reviewsfromdb:data.reverse()},()=>this.createSet())
     }
     })
   }
@@ -103,21 +103,11 @@ console.log(this.state.reviewsfromdb[start])
       url:`/shoes/${prodid}reviews`,
       method:'GET',
       success:(data)=>{this.setState({
-        reviewsfromdb:data
+        reviewsfromdb:data.reverse()
       })
     }
     })
 
-  }
-
-  resetStartEnd(){
-    console.log('reset triggered')
-    var resetStart = 0;
-    var resetEnd = 10;
-    this.setState({
-      start: resetStart,
-      end: resetEnd
-    })
   }
 
 
