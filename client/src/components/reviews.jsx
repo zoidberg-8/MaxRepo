@@ -6,17 +6,25 @@ import styled from 'styled-components';
 class Reviews extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      reviewsSet:[],
+      reviewstoshow:10
+    }
     this.style={
 
       "width":"50%",
       "background":"yellow",
       "height":"1px"
     }
+
   }
 
 
 
+
   render(){
+
+
     return(
 <div>
   <Header>{this.props.allreviews.length} Reviews</Header>
@@ -68,7 +76,7 @@ class Reviews extends React.Component{
 
     </Oneframe>
   </InfoPanel>
-{this.props.allreviews.map((i,index)=>
+{ this.props.reviewsSet.map((i,index)=>
   <ReviewPanel>
     <ReviewInfo>
       <Starframe>
