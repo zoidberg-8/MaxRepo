@@ -64,8 +64,6 @@ class Accordion extends React.Component{
   createSet(){
       var newSet = this.state.reviewsSet
       var start = this.state.start
-      console.log(start)
-console.log(this.state.reviewsfromdb[start])
       for (var start; start<this.state.reviewstoshow;start++){
 
        if(this.state.reviewsfromdb[start]){
@@ -76,27 +74,35 @@ console.log(this.state.reviewsfromdb[start])
 
       this.setState({
         reviewsSet:newSet
-      })
+      },console.log(this.state.reviewsSet))
 
-      console.log('from create set',this.state.reviewsSet)
+
 
   }
 
   increaseLimit(){
-    console.log(this.state.reviewsfromdb)
+    var allreviews = this.state.reviewsfromdb
+    console.log(allreviews[this.state.start])
+    if(allreviews[this.state.start]){
+
     var newLimit = this.state.reviewstoshow + 10
     var newStart = this.state.start +10
+
+
 
     this.setState({
       reviewstoshow: newLimit,
       start: newStart
     }, ()=>this.createSet())
   }
+  console.log('start', newStart)
+  console.log('end', newLimit)
+  }
 
   //updatefunction passed into <inputform> as callback to update reviewsfromdb state after form submission
   updatefunction(){
+
     var path = window.location.pathname
-    console.log(path.slice(7))
     var prodid = path.slice(7)
 
     $.ajax({
@@ -104,6 +110,12 @@ console.log(this.state.reviewsfromdb[start])
       method:'GET',
       success:(data)=>{this.setState({
         reviewsfromdb:data.reverse()
+      },()=>{var latest = this.state.reviewsfromdb[0]
+        this.state.reviewsSet.shift()
+       var addition = this.state.reviewsSet.unshift(latest)
+      this.setState({
+        reviewSet:addition
+      },()=>console.log(this.state.reviewsSet))
       })
     }
     })
@@ -120,7 +132,10 @@ console.log(this.state.reviewsfromdb[start])
 
           <ReviewContent open = {this.state.open} >
 
-          <InputForm updatefunction = {this.updatefunction}/>
+          <InputForm
+          updatefunction = {this.updatefunction}
+          createSet = {this.createSet}
+          />
 
           <ReviewsPreview allreviews = {this.state.reviewsfromdb}/>
 
