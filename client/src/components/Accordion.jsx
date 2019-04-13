@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import Reviews from './reviews.jsx';
 import ReviewsPreview from './reviewspreview.jsx'
 import ModalAllReviews from './Modal.allreviews.jsx'
 import InputForm from './Modal.writereview.jsx'
