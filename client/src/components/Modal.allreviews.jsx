@@ -33,6 +33,7 @@ class ModalAllReviews extends React.Component{
             allreviews = {this.props.allreviews}
             reviewsSet = {this.props.reviewsSet}/>
           <div style ={{'text-align':'center'}}>
+
             <Loadbtn onClick={this.props.increaselimit}>More Reviews</Loadbtn>
           </div>
           </Modal>
