@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import styles from './Form.module.css';
 import $ from 'jquery';
 
+//customStyle for the modal pop-up
 var customStyles ={
   content:{
     width:'55%',
@@ -44,7 +45,10 @@ class InputForm extends React.Component{
       method:'POST',
       body:data
 
-    }).then(()=>this.toggleInputModal()).then(()=>this.props.updatefunction())
+    })
+    .then(()=>this.toggleInputModal())
+    .then(()=>this.props.updatefunction())
+
   }
 
   render(){
