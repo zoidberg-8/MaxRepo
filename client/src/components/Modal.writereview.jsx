@@ -67,7 +67,7 @@ class InputForm extends React.Component{
       <Gridform id='reviewform' onSubmit = {this.handleSubmit} >
 
         <Divcol>
-          <div>Overall Rating</div>
+          <div style={{'padding-top':'4px'}}>Overall Rating</div>
         </Divcol>
 
         <Divtext>
