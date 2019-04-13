@@ -77,7 +77,9 @@ class Reviews extends React.Component{
     </Oneframe>
   </InfoPanel>
 { this.props.reviewsSet.map((i,index)=>
+
   <ReviewPanel>
+
     <ReviewInfo>
       <Starframe>
 
