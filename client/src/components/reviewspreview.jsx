@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import StarHelper from'./Starhelper.jsx';
+
+
+
 
 var ReviewsPreview = (props) =>(
   <div style={{"width":"500px"}}>
@@ -7,7 +11,7 @@ var ReviewsPreview = (props) =>(
    {props.allreviews.slice(0,3).map((i)=>
     <Eachreviewdiv>
       <Titlediv>{i.review_title}</Titlediv>
-      <Starspan>{i.rating}</Starspan>
+     <StarHelper rating={i.rating}/>
       <Span>{i.username}</Span>
       <Span>{i.date_submitted.substring(0,10)}</Span>
       <Textbodydiv>{i.review_text}</Textbodydiv>
