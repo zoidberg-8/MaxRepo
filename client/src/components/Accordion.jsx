@@ -26,9 +26,8 @@ class Accordion extends React.Component{
     this.updatefunction = this.updatefunction.bind(this)
     this.createSet = this.createSet.bind(this)
     this.increaseLimit = this.increaseLimit.bind(this)
+    this.resetStartEnd = this.resetStartEnd.bind(this)
   }
-
-
 
   componentDidMount(){
     console.log('componenet mount')
@@ -45,22 +44,18 @@ class Accordion extends React.Component{
       method:'GET',
       success:(data)=>{
         this.setState({
-        reviewsfromdb:data})
-
-      this.createSet()
-
+        reviewsfromdb:data},()=>this.createSet())
     }
     })
   }
 
   toggleOpen(){
-    //console.log(this.state.reviewsfromdb)
     this.setState({
       open: !this.state.open
     })
   }
+
   toggleModal(){
-    //console.log('toggle modal')
     this.setState({
       modal: !this.state.modal
     })
@@ -69,9 +64,8 @@ class Accordion extends React.Component{
   createSet(){
       var newSet = this.state.reviewsSet
       var start = this.state.start
-      console.log(this.state.reviewsSet)
-      console.log('start',start)
-      console.log('value from db', this.state.reviewsfromdb[start],'index',start)
+      console.log(start)
+console.log(this.state.reviewsfromdb[start])
       for (var start; start<this.state.reviewstoshow;start++){
 
        if(this.state.reviewsfromdb[start]){
@@ -89,20 +83,17 @@ class Accordion extends React.Component{
   }
 
   increaseLimit(){
-    console.log('start of increaselimit func', this.state.reviewsSet)
+    console.log(this.state.reviewsfromdb)
     var newLimit = this.state.reviewstoshow + 10
     var newStart = this.state.start +10
-    console.log('new limit after increase', newLimit)
+
     this.setState({
       reviewstoshow: newLimit,
       start: newStart
     }, ()=>this.createSet())
-
-    console.log('new limit', this.state.reviewstoshow)
-    console.log('new set from increase limit function',this.state.newSet)
   }
 
-  //this function passed into inputform as callback to update reviewsfrom db state after form submission
+  //updatefunction passed into <inputform> as callback to update reviewsfromdb state after form submission
   updatefunction(){
     var path = window.location.pathname
     console.log(path.slice(7))
@@ -114,11 +105,19 @@ class Accordion extends React.Component{
       success:(data)=>{this.setState({
         reviewsfromdb:data
       })
-
-
     }
     })
 
+  }
+
+  resetStartEnd(){
+    console.log('reset triggered')
+    var resetStart = 0;
+    var resetEnd = 10;
+    this.setState({
+      start: resetStart,
+      end: resetEnd
+    })
   }
 
 
@@ -141,6 +140,7 @@ class Accordion extends React.Component{
             reviewsSet = {this.state.reviewsSet}
             increaselimit = {this.increaseLimit}
             createSet = {this.createSet}
+            reset = {this.resetStartEnd}
           />
 
 
