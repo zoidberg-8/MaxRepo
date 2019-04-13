@@ -7,13 +7,21 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          //options: {
-            //presets: ['@babel/preset-react', '@babel/preset-env']
-
-
-          //}
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        use:{loader: 'style-loader'}
+      },
+      {
+        test: /\.css$/,
+        use:{loader: 'css-loader',
+        query: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      }}
+
     ]
   },
    output: {
