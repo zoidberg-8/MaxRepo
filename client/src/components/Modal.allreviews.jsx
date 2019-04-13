@@ -29,7 +29,12 @@ class ModalAllReviews extends React.Component{
             x
           </Closebtn>
      {/* LOAD ALL REVIEWS IN MODAL */}
-            <Reviews allreviews = {this.props.allreviews}/>
+            <Reviews
+            allreviews = {this.props.allreviews}
+            reviewsSet = {this.props.reviewsSet}/>
+          <div style ={{'text-align':'center'}}>
+            <Loadbtn onClick={this.props.increaselimit}>More Reviews</Loadbtn>
+          </div>
           </Modal>
 
       </div>
@@ -44,6 +49,15 @@ margin:auto;
 `
 
 var Morebtn = styled.button`
+font-family:'Helvetica Neue';
+border:0px;
+border-bottom:solid 0.5px black;
+padding-top:20px;
+padding-left:0px;
+padding-right:0px;
+`
+
+var Loadbtn = styled.button`
 font-family:'Helvetica Neue';
 border:0px;
 border-bottom:solid 0.5px black;
