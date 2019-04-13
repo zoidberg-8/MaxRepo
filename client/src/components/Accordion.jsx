@@ -7,8 +7,6 @@ import InputForm from './Modal.writereview.jsx'
 Modal.setAppElement('#reviews')
 import $ from 'jquery';
 
-
-
 class Accordion extends React.Component{
   constructor(props){
     super(props);
@@ -25,9 +23,11 @@ class Accordion extends React.Component{
     this.updatefunction = this.updatefunction.bind(this)
     this.createSet = this.createSet.bind(this)
     this.increaseLimit = this.increaseLimit.bind(this)
-
   }
 
+  //retrieves all records from database matching product ID
+  //then creates a set of 10 reviews to be shown in 'more reviews'
+  //required because each page of reviews shows only 10 before load more is clicked
   componentDidMount(){
     console.log('componenet mount')
     var path = window.location.pathname
@@ -35,7 +35,7 @@ class Accordion extends React.Component{
     var prodid = path.slice(7)
 
     if (prodid===''){
-      prodid='1/'
+          prodid='1/'
     }
 
     $.ajax({
@@ -66,36 +66,29 @@ class Accordion extends React.Component{
       for (var start; start<this.state.reviewstoshow;start++){
 
        if(this.state.reviewsfromdb[start]){
-
-        newSet.push(this.state.reviewsfromdb[start])
+          newSet.push(this.state.reviewsfromdb[start])
        }
       }
 
       this.setState({
         reviewsSet:newSet
       },console.log(this.state.reviewsSet))
-
-
-
   }
 
   increaseLimit(){
     var allreviews = this.state.reviewsfromdb
-    console.log(allreviews[this.state.start])
+
     if(allreviews[this.state.start]){
 
-    var newLimit = this.state.reviewstoshow + 10
-    var newStart = this.state.start +10
+      var newLimit = this.state.reviewstoshow + 10
+      var newStart = this.state.start +10
 
+      this.setState({
+        reviewstoshow: newLimit,
+        start: newStart
+      }, ()=>this.createSet())
+    }
 
-
-    this.setState({
-      reviewstoshow: newLimit,
-      start: newStart
-    }, ()=>this.createSet())
-  }
-  console.log('start', newStart)
-  console.log('end', newLimit)
   }
 
   //updatefunction passed into <inputform> as callback to update reviewsfromdb state after form submission
@@ -111,14 +104,13 @@ class Accordion extends React.Component{
         reviewsfromdb:data.reverse()
       },()=>{var latest = this.state.reviewsfromdb[0]
         this.state.reviewsSet.shift()
-       var addition = this.state.reviewsSet.unshift(latest)
-      this.setState({
+        var addition = this.state.reviewsSet.unshift(latest)
+        this.setState({
         reviewSet:addition
       },()=>console.log(this.state.reviewsSet))
       })
     }
     })
-
   }
 
 
@@ -129,24 +121,22 @@ class Accordion extends React.Component{
       <div>
         <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
 
-          <ReviewContent open = {this.state.open} >
+          <ReviewContent
+            open = {this.state.open} >
 
           <InputForm
-          updatefunction = {this.updatefunction}
-          createSet = {this.createSet}
-          />
+            updatefunction = {this.updatefunction}
+            createSet = {this.createSet}/>
 
-          <ReviewsPreview allreviews = {this.state.reviewsfromdb}/>
-
+          <ReviewsPreview
+            allreviews = {this.state.reviewsfromdb}/>
 
           <ModalAllReviews
             allreviews = {this.state.reviewsfromdb}
             reviewsSet = {this.state.reviewsSet}
             increaselimit = {this.increaseLimit}
             createSet = {this.createSet}
-            reset = {this.resetStartEnd}
-          />
-
+            reset = {this.resetStartEnd}/>
 
         </ReviewContent>
       </div>
