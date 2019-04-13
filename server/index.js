@@ -47,7 +47,7 @@ app.post('/shoes/:id/reviews',upload.none(),(req,res)=>{
 })
 
 
-var port = process.env.PORT ||7000
+var port = process.env.PORT ||3002
 app.listen(port,(err,result)=>{
   if(err){
     console.log('SERVER.JS LINE 10 ERROR')
