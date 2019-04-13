@@ -56,6 +56,7 @@ border-bottom:solid 0.5px black;
 padding-top:20px;
 padding-left:0px;
 padding-right:0px;
+font-size:14px;
 `
 
 var Loadbtn = styled.button`
