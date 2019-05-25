@@ -8,7 +8,7 @@ From within the root directory, run
 
 - ```npm install``` to install required packages.
 - ```npm run seed``` to seed MySQL database with sample reviews.
-- ```npm run react-dev``` to build webpack bundle
+- ```npm run react-dev``` to build webpack bundle.
 - ```npm run start``` to start server on local host. Port currently set 7000.
 
 ## Testing
