@@ -191,6 +191,8 @@ border:0px;
 border-bottom:solid 0.5px black;
 padding-left:0px;
 padding-right:0px;
+font-size:14px;
+
 `
 
 var Gridform = styled.form`

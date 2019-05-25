@@ -28,6 +28,7 @@ padding-left:5px;
 var Textbodydiv = styled.div`
 font-size:12px;
 font-family:'Helvetica Neue'
+padding-top:5px;
 `
 
 var Titlediv = styled.div`

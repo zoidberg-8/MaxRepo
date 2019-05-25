@@ -108,7 +108,12 @@ class Accordion extends React.Component{
 
   render(){
     return(
+<<<<<<< HEAD
       <div>
+=======
+
+      <div style={{"width":"80%","padding-top":"10%"}}>
+>>>>>>> 38daac7d6c6c4b7ac3e8a34b9d8d9ad0ecb6358a
         <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
 
           <ReviewContent
@@ -146,8 +151,10 @@ var Button = styled.button`
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight:500
   transition: 0.4s;
+
 `;
 
 var ReviewContent = styled.div`
