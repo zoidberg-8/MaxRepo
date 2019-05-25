@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
-import Reviews from './reviews.jsx'
-import styled from 'styled-components'
+import Reviews from './reviews.jsx';
+import styled from 'styled-components';
 
 class ModalAllReviews extends React.Component{
   constructor(props){

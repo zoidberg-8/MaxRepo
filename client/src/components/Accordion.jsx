@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import ReviewsPreview from './reviewspreview.jsx'
-import ModalAllReviews from './Modal.allreviews.jsx'
-import InputForm from './Modal.writereview.jsx'
-Modal.setAppElement('#reviews')
+import ReviewsPreview from './reviewspreview.jsx';
+import ModalAllReviews from './Modal.allreviews.jsx';
+import InputForm from './Modal.writereview.jsx';
+Modal.setAppElement('#reviews');
 import $ from 'jquery';
 
 class Accordion extends React.Component{
@@ -25,23 +25,17 @@ class Accordion extends React.Component{
     this.increaseLimit = this.increaseLimit.bind(this)
   }
 
-  //retrieves all records from database matching product ID
-  //then creates a set of 10 reviews to be shown in 'more reviews'
-  //required because each page of reviews shows only 10 before load more is clicked
   componentDidMount(){
-    console.log('componenet mount')
-    var path = window.location.pathname
-    console.log(path.slice(7))
-    var prodid = path.slice(7)
-
-    if (prodid===''){
+    const path = window.location.pathname;
+    const prodid = path.slice(7);
+    if (prodid==='') {
           prodid='1/'
-    }
+    };
 
     $.ajax({
-      url:`/shoes/${prodid}reviews`,
-      method:'GET',
-      success:(data)=>{
+      url: `/shoes/${prodid}reviews`,
+      method: 'GET',
+      success:(data) => {
         this.setState({
         reviewsfromdb:data.reverse()},()=>this.createSet())
     }
@@ -58,17 +52,16 @@ class Accordion extends React.Component{
     this.setState({
       modal: !this.state.modal
     })
-  }
+  };
 
   createSet(){
       var newSet = this.state.reviewsSet
       var start = this.state.start
       for (var start; start<this.state.reviewstoshow;start++){
-
        if(this.state.reviewsfromdb[start]){
           newSet.push(this.state.reviewsfromdb[start])
        }
-      }
+      };
 
       this.setState({
         reviewsSet:newSet
@@ -78,7 +71,7 @@ class Accordion extends React.Component{
   increaseLimit(){
     var allreviews = this.state.reviewsfromdb
 
-    if(allreviews[this.state.start]){
+    if (allreviews[this.state.start]) {
 
       var newLimit = this.state.reviewstoshow + 10
       var newStart = this.state.start +10
@@ -113,11 +106,8 @@ class Accordion extends React.Component{
     })
   }
 
-
   render(){
-
     return(
-
       <div>
         <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
 
@@ -126,22 +116,23 @@ class Accordion extends React.Component{
 
           <InputForm
             updatefunction = {this.updatefunction}
-            createSet = {this.createSet}/>
+            createSet = {this.createSet}
+          />
 
           <ReviewsPreview
-            allreviews = {this.state.reviewsfromdb}/>
+            allreviews = {this.state.reviewsfromdb}
+          />
 
           <ModalAllReviews
             allreviews = {this.state.reviewsfromdb}
             reviewsSet = {this.state.reviewsSet}
             increaselimit = {this.increaseLimit}
             createSet = {this.createSet}
-            reset = {this.resetStartEnd}/>
-
+            reset = {this.resetStartEnd}
+          />
         </ReviewContent>
       </div>
     )
-
   }
 }
 

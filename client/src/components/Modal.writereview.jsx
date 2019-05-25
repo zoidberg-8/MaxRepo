@@ -12,7 +12,6 @@ var customStyles ={
   }
 };
 
-
 class InputForm extends React.Component{
   constructor(props){
     super(props)

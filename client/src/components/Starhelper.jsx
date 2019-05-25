@@ -16,11 +16,9 @@ function StarHelper(props){
   if (props.rating===1) {
     return <span>&#9733;&#9734;&#9734;&#9734;&#9734;</span>
   }
-
-
   return (
     <span>&#9733;&#9734;&#9734;&#9734;&#9734;</span>
   );
 }
 
-export default StarHelper
+export default StarHelper;

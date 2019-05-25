@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import StarHelper from'./Starhelper.jsx';
 
-
-
-
 var ReviewsPreview = (props) =>(
   <div style={{"width":"500px"}}>
 
@@ -42,7 +39,4 @@ var Eachreviewdiv = styled.div`
 padding-top:12px;
 padding-bottom:5px;
 `
-
-
-
-export default ReviewsPreview
+export default ReviewsPreview;

@@ -1,6 +1,6 @@
-# Project Name
+# Nike Product Review Componenet
 
-> Nike product page clone. Key features include 1) product selection, 2)image magnifier, reviews panel, 3) product suggestions
+> Nike product page clone. Key features include 1) product selection, 2)image magnifier, reviews panel, 3) product suggestions. This component focuses on the read reviews and write reviews component.
 
 
 ## Related Projects

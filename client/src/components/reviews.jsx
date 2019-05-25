@@ -19,12 +19,7 @@ class Reviews extends React.Component{
 
   }
 
-
-
-
   render(){
-
-
     return(
 <div>
   <Header>{this.props.allreviews.length} Reviews</Header>
