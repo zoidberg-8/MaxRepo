@@ -14,7 +14,7 @@
     "seed": "mysql -u root < schema.sql && node datainit.js",
     "start": "node ./server",
     "test": "jest",
-    "react-dev": "webpack -d --watch"
+    "build": "webpack"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
