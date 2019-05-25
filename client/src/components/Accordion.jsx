@@ -92,7 +92,6 @@ class Accordion extends React.Component {
     }
   }
 
-  //updatefunction passed into <inputform> as callback to update reviewsfromdb state after form submission
   updatefunction() {
     var path = window.location.pathname;
     var prodid = path.slice(7);
