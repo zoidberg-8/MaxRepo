@@ -7,137 +7,145 @@ import InputForm from './Modal.writereview.jsx';
 Modal.setAppElement('#reviews');
 import $ from 'jquery';
 
-class Accordion extends React.Component{
-  constructor(props){
+class Accordion extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
-      open:false,
-      modal:false,
-      reviewsfromdb:[],
-      reviewsSet:[],
-      start:0,
-      reviewstoshow:10
-    }
-    this.toggleOpen = this.toggleOpen.bind(this)
-    this.toggleModal = this.toggleModal.bind(this)
-    this.updatefunction = this.updatefunction.bind(this)
-    this.createSet = this.createSet.bind(this)
-    this.increaseLimit = this.increaseLimit.bind(this)
+      open: false,
+      modal: false,
+      reviewsfromdb: [],
+      reviewsSet: [],
+      start: 0,
+      reviewstoshow: 10
+    };
+    this.toggleOpen = this.toggleOpen.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.updatefunction = this.updatefunction.bind(this);
+    this.createSet = this.createSet.bind(this);
+    this.increaseLimit = this.increaseLimit.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const path = window.location.pathname;
     const prodid = path.slice(7);
-    if (prodid==='') {
-          prodid='1/'
-    };
+    if (prodid === '') {
+      prodid = '1/';
+    }
 
     $.ajax({
       url: `/shoes/${prodid}reviews`,
       method: 'GET',
-      success:(data) => {
-        this.setState({
-        reviewsfromdb:data.reverse()},()=>this.createSet())
-    }
-    })
+      success: data => {
+        this.setState(
+          {
+            reviewsfromdb: data.reverse()
+          },
+          () => this.createSet()
+        );
+      }
+    });
   }
 
-  toggleOpen(){
+  toggleOpen() {
     this.setState({
       open: !this.state.open
-    })
+    });
   }
 
-  toggleModal(){
+  toggleModal() {
     this.setState({
       modal: !this.state.modal
-    })
-  };
-
-  createSet(){
-      var newSet = this.state.reviewsSet
-      var start = this.state.start
-      for (var start; start<this.state.reviewstoshow;start++){
-       if(this.state.reviewsfromdb[start]){
-          newSet.push(this.state.reviewsfromdb[start])
-       }
-      };
-
-      this.setState({
-        reviewsSet:newSet
-      },console.log(this.state.reviewsSet))
+    });
   }
 
-  increaseLimit(){
-    var allreviews = this.state.reviewsfromdb
-
-    if (allreviews[this.state.start]) {
-
-      var newLimit = this.state.reviewstoshow + 10
-      var newStart = this.state.start +10
-
-      this.setState({
-        reviewstoshow: newLimit,
-        start: newStart
-      }, ()=>this.createSet())
+  createSet() {
+    var newSet = this.state.reviewsSet;
+    var start = this.state.start;
+    for (var start; start < this.state.reviewstoshow; start++) {
+      if (this.state.reviewsfromdb[start]) {
+        newSet.push(this.state.reviewsfromdb[start]);
+      }
     }
 
+    this.setState(
+      {
+        reviewsSet: newSet
+      },
+      console.log(this.state.reviewsSet)
+    );
+  }
+
+  increaseLimit() {
+    var allreviews = this.state.reviewsfromdb;
+
+    if (allreviews[this.state.start]) {
+      var newLimit = this.state.reviewstoshow + 10;
+      var newStart = this.state.start + 10;
+
+      this.setState(
+        {
+          reviewstoshow: newLimit,
+          start: newStart
+        },
+        () => this.createSet()
+      );
+    }
   }
 
   //updatefunction passed into <inputform> as callback to update reviewsfromdb state after form submission
-  updatefunction(){
-
-    var path = window.location.pathname
-    var prodid = path.slice(7)
+  updatefunction() {
+    var path = window.location.pathname;
+    var prodid = path.slice(7);
 
     $.ajax({
-      url:`/shoes/${prodid}reviews`,
-      method:'GET',
-      success:(data)=>{this.setState({
-        reviewsfromdb:data.reverse()
-      },()=>{var latest = this.state.reviewsfromdb[0]
-        this.state.reviewsSet.shift()
-        var addition = this.state.reviewsSet.unshift(latest)
-        this.setState({
-        reviewSet:addition
-      },()=>console.log(this.state.reviewsSet))
-      })
-    }
-    })
+      url: `/shoes/${prodid}reviews`,
+      method: 'GET',
+      success: data => {
+        this.setState(
+          {
+            reviewsfromdb: data.reverse()
+          },
+          () => {
+            var latest = this.state.reviewsfromdb[0];
+            this.state.reviewsSet.shift();
+            var addition = this.state.reviewsSet.unshift(latest);
+            this.setState(
+              {
+                reviewSet: addition
+              },
+              () => console.log(this.state.reviewsSet)
+            );
+          }
+        );
+      }
+    });
   }
 
-  render(){
-    return(
-<<<<<<< HEAD
+  render() {
+    return (
       <div>
-=======
+        <Button onClick={this.toggleOpen}>
+          Reviews ({this.state.reviewsfromdb.length})
+        </Button>
 
-      <div style={{"width":"80%","padding-top":"10%"}}>
->>>>>>> 38daac7d6c6c4b7ac3e8a34b9d8d9ad0ecb6358a
-        <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
-
-          <ReviewContent
-            open = {this.state.open} >
-
+        <ReviewContent open={this.state.open}>
           <InputForm
-            updatefunction = {this.updatefunction}
-            createSet = {this.createSet}
+            updatefunction={this.updatefunction}
+            createSet={this.createSet}
           />
 
-          <ReviewsPreview
-            allreviews = {this.state.reviewsfromdb}
-          />
+          <ReviewsPreview allreviews={this.state.reviewsfromdb} />
 
           <ModalAllReviews
-            allreviews = {this.state.reviewsfromdb}
-            reviewsSet = {this.state.reviewsSet}
-            increaselimit = {this.increaseLimit}
-            createSet = {this.createSet}
-            reset = {this.resetStartEnd}
+            allreviews={this.state.reviewsfromdb}
+            reviewsSet={this.state.reviewsSet}
+            increaselimit={this.increaseLimit}
+            createSet={this.createSet}
+            reset={this.resetStartEnd}
           />
         </ReviewContent>
       </div>
-    )
+    );
   }
 }
 
@@ -160,11 +168,11 @@ var Button = styled.button`
 var ReviewContent = styled.div`
   border: 0px solid gray;
   border-top: none;
-  opacity: ${props => (props.open ? "1" : "0")};
-  max-height: ${props => (props.open ? "100%" : "0")};
+  opacity: ${props => (props.open ? '1' : '0')};
+  max-height: ${props => (props.open ? '100%' : '0')};
   overflow: hidden;
-  padding: ${props => (props.open ? "15px" : "0 15px")};
+  padding: ${props => (props.open ? '15px' : '0 15px')};
   transition: all 0.3s;
-`
+`;
 
-export default Accordion
+export default Accordion;
